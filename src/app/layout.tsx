@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import type { AppProps } from 'next/app'
+import Layout from '@/components/Layout'
+import SEO from '@/components/SEO'
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,7 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Layout>
+          <SEO 
+            title={process.env.siteTitle || 'Glasgow Books'}
+          />
+          {children}
+        </Layout>
+      </body>
     </html>
   );
 }

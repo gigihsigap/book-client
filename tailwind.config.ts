@@ -17,8 +17,19 @@ const config = {
         "2xl": "1400px",
       },
     },
+    
     extend: {
+      fontFamily: {
+        primary: ['"Josefin Sans"']
+      },
+      
       colors: {
+        palette: {
+          lighter: '#F5F3FF',
+          light: '#DDD6FE',
+          primary: '#5B21B6',
+          dark: '#4C1D95',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -76,5 +87,7 @@ const config = {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config
+
+
 
 export default config

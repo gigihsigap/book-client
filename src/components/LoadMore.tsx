@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import { Book } from '@/types';
 import { useInView } from 'react-intersection-observer';
-import { Spinner } from './ui/spinner';
-import { fetchBooks } from '@/actions/fetch-books';
-import { Books } from './books';
-import { delay } from '@/lib/utils';
+import { Spinner } from '@/components/ui/spinner';
+import { fetchBooks } from '../actions/fetch-books';
+import { Books } from './BookListing';
+import { delay } from '../lib/utils';
 
 export function LoadMore() {
     const [books, setBooks] = useState<Book[]>([]);
