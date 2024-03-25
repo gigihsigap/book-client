@@ -1,5 +1,7 @@
 "use client"
 
+
+
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { createShopifyCheckout, updateShopifyCheckout, setLocalData, saveLocalData } from '../lib/cartUtils';
 import { Cart, CartItem, CartProviderProps } from '@/types';
