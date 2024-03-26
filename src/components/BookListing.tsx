@@ -8,17 +8,19 @@ export interface BookListingProps {
 }
 
 export function BookListing({ books }: BookListingProps) {
-    console.log('Books fetched:', books?.length)
     return (
         <>
-            {books ? (
-                books.map((book, index) => {
-                    return (
+            {books && (books.length > 0) ? (
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+                    {books.map((book, index) => {
+                        return (
                         <ProductCard key={index} book={book} />
-                    )
-                })
+                        )
+                    })}
+                </div>  
             ) : (
-                <div className='text-xl font-bold'>No books available!</div>
+                <>
+                </>
             )}
         </>
     )

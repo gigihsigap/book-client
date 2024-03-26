@@ -9,7 +9,7 @@ function Footer() {
         href='https://twitter.com/deepwhitman'
         target='_blank'
         rel='noreferrer'
-        className='text-palette-primary font-bold px-1'
+        className='font-bold px-1'
       >
         Gigih Agung
         </a>
