@@ -1,62 +1,41 @@
-import ProductSection from '@/components/ProductSection'
-import { fetchBookBySlug } from '@/actions/fetch-books'
-import { Book } from '@/types'
+'use client'
 
-export default function BookDetails({ params }: { params: {slug: string}}) {
-  // const books = await fetchBooks(1)
+import { useEffect, useState } from 'react';
+import ProductSection from '@/components/ProductSection';
+import { fetchBookBySlug } from '@/actions/fetch-books';
+import { Book } from '@/types';
+import { Spinner } from '@/components/ui/spinner';
 
-  const book: Book = {
-    'id': 2,
-    'created_at': '2024-03-24T19:10:47.252Z',
-    'updated_at': '2024-03-24T19:10:47.252Z',
-    'title': 'Social Dynamics in Swiss Society',
-    'author': 'Robin Tillmann, Marieke Voorpostel, Peter Farago',
-    'cover': 'https://www.dbooks.org/img/books/3319895575s.jpg',
-    'price': 15,
-    'tags': [
-        'culture'
-    ],
-    'slug': 'social-dynamics-in-swiss-society'
+export default function BookDetails({ params }: { params: { slug: string } }) {
+  const [book, setBook] = useState<Book>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedBook = await fetchBookBySlug(params.slug);
+        console.log("fetchedBooks", fetchedBook)
+        if (fetchedBook !== null) {
+          setBook(fetchedBook);
+        }
+      } catch (error) {
+        console.error('Error fetching book:', error);
+      }
+    };
+
+    fetchData();
+  }, [params.slug]); // Dependency array to re-fetch data when slug changes
+
+  if (!book) {
+    return <div className='flex justify-center items-center h-screen'>
+      <Spinner/>
+    </div>
+    ;
   }
 
+  // Assuming you want to render the first book in the array
   return (
     <div className='min-h-screen py-12 sm:pt-20'>
       <ProductSection book={book} />
-    </div>   
-  )
+    </div>
+  );
 }
-
-// export async function getStaticPaths() {
-//   // const productSlugs = await getProductSlugs()
-//   const paths = productSlugs.map((slug) => {    
-//     const product = String(slug.node.handle)
-//     return {
-//       params: { product }
-//     }
-//   })
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
-
-// export async function getStaticProps({ params }: Book) {
-//   // const productData = await getProduct(params.product) 
-//   const productData = await fetchBookBySlug(params.slug) 
-//   return {
-//     props: {
-//       productData,
-//     },
-//   }
-// }
-
-// function ProductPage({ productData }) {  
-//   return (
-//     <div className='min-h-screen py-12 sm:pt-20'>
-//       <BackToProductButton />
-//       <ProductSection productData={productData} />
-//     </div>
-//   )
-// }
-
-{/* <div>Details about book {params.slug}</div> */}

@@ -4,11 +4,12 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import { createShopifyCheckout, updateShopifyCheckout, setLocalData, saveLocalData } from '../lib/cartUtils'
 import { Cart, CartItem, CartProviderProps } from '@/types'
 
-const CartContext = createContext<[Cart, string, boolean]>([[], '', false])
+const CartContext = createContext<[Cart, string, boolean, number]>([[], '', false, 100])
 const AddToCartContext = createContext<(newItem: CartItem) => void>(() => {})
 const UpdateCartQuantityContext = createContext<(id: string, quantity: number) => void>(() => {}) // Changed quantity type to number
+const PurchaseMadeContext = createContext<() => void>(() => {})
 
-export function useCartContext(): [Cart, string, boolean] {
+export function useCartContext(): [Cart, string, boolean, number] {
   return useContext(CartContext)
 }
 
@@ -20,8 +21,13 @@ export function useUpdateCartQuantityContext(): (id: string, quantity: number) =
   return useContext(UpdateCartQuantityContext)
 }
 
+export function usePurchaseMadeContext(): () => void { // Changed quantity type to number
+  return useContext(PurchaseMadeContext)
+}
+
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<Cart>([])
+  const [points, setPoints] = useState<number>(100)
   const [checkoutId, setCheckoutId] = useState<string>('')
   const [checkoutUrl, setCheckoutUrl] = useState<string>('/1') // Where the user will check out to
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -99,11 +105,21 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     saveLocalData(newCart, checkoutId, checkoutUrl)
     setIsLoading(false)
   }
+
+  async function purchaseMade(): Promise<void> {
+    setIsLoading(true)
+    setCart([])
+    saveLocalData([], checkoutId, checkoutUrl)
+    setIsLoading(false)
+  }
+
   return (
-    <CartContext.Provider value={[cart, checkoutUrl, isLoading]}>
+    <CartContext.Provider value={[cart, checkoutUrl, isLoading, points]}>
       <AddToCartContext.Provider value={addToCart}>
         <UpdateCartQuantityContext.Provider value={updateCartItemQuantity}>
+          <PurchaseMadeContext.Provider value={purchaseMade}>
           {children}
+          </PurchaseMadeContext.Provider>
         </UpdateCartQuantityContext.Provider>
       </AddToCartContext.Provider>
     </CartContext.Provider>
