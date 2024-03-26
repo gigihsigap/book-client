@@ -1,14 +1,8 @@
 import { ReactNode } from 'react'
 
 export interface CartItem {
-    variantId: number
+    book: Book
     variantQuantity: number
-    variantPrice: number // Added optional variantPrice to match the expected type in createShopifyCheckout
-    productImage?: string
-    productTitle?: string
-    productHandle?: string
-    variantTitle?: string
-    originalSrc?: string
 }
   
 export type Cart = CartItem[]

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { useCartContext, useAddToCartContext } from '@/context/Store'
@@ -10,9 +9,9 @@ type ProductFormProps = {
 }
 
 function ProductForm({ book }: ProductFormProps) {
-  const [quantity, setQuantity] = useState(1)
-  const [variantId, setVariantId] = useState(book)
-  const [variant, setVariant] = useState(book)
+  // const [quantity, setQuantity] = useState(1)
+  // const [variantId, setVariantId] = useState(book)
+  // const [variant, setVariant] = useState(book)
   const isLoading = useCartContext()[2]
   const addToCart = useAddToCartContext()
 
@@ -30,22 +29,17 @@ function ProductForm({ book }: ProductFormProps) {
 //     // send back size change
 //     const selectedVariant = [book].filter(v => v.id === e).pop()
 //     setVariantPrice(selectedVariant.price)
-
 //     // update variant
 //     setVariant(selectedVariant)
 //   }
 
   async function handleAddToCart() {
+    console.log("handleAddToCart", book)
     // const varId = variant.id
     // update store context
     // if (quantity !== '') {
-      addToCart({        
-        productTitle: variant.title,
-        productHandle: variant.author,
-        productImage: variant.cover,
-        variantId: variant.id,
-        variantPrice: variant.price,
-        variantTitle: variant.title,
+      addToCart({
+        book: book,
         variantQuantity: 1
       })
     // }

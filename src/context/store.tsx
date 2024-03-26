@@ -1,8 +1,6 @@
 'use client'
 
-
-
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import { createShopifyCheckout, updateShopifyCheckout, setLocalData, saveLocalData } from '../lib/cartUtils'
 import { Cart, CartItem, CartProviderProps } from '@/types'
 
@@ -25,16 +23,16 @@ export function useUpdateCartQuantityContext(): (id: string, quantity: number) =
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<Cart>([])
   const [checkoutId, setCheckoutId] = useState<string>('')
-  const [checkoutUrl, setCheckoutUrl] = useState<string>('')
+  const [checkoutUrl, setCheckoutUrl] = useState<string>('/1') // Where the user will check out to
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    setLocalData(setCart, setCheckoutId, setCheckoutUrl)
+    // setLocalData(setCart, setCheckoutId, setCheckoutUrl)
   }, [])
 
   useEffect(() => {
     const onReceiveMessage = (e: StorageEvent) => {
-      setLocalData(setCart, setCheckoutId, setCheckoutUrl)
+      // setLocalData(setCart, setCheckoutId, setCheckoutUrl)
     }
 
     window.addEventListener('storage', onReceiveMessage)
@@ -58,7 +56,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       let itemAdded = false
   
       newCart.forEach(item => {
-        if (item.variantId === newItem.variantId) {
+        if (item.book.id.toString() === newItem.book.id.toString()) {
           item.variantQuantity += newItem.variantQuantity
           itemAdded = true
         }
@@ -89,7 +87,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
   
     let newCart = [...cart]
     newCart.forEach(item => {
-      if (item.variantId === id) {
+      if (item.book.id.toString() === id) {
         item.variantQuantity = newQuantity
       }
     })

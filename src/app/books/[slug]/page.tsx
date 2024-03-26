@@ -6,7 +6,7 @@ export default function BookDetails({ params }: { params: {slug: string}}) {
   // const books = await fetchBooks(1)
 
   const book: Book = {
-    'id': 3,
+    'id': 2,
     'created_at': '2024-03-24T19:10:47.252Z',
     'updated_at': '2024-03-24T19:10:47.252Z',
     'title': 'Social Dynamics in Swiss Society',

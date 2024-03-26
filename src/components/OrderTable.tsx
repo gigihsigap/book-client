@@ -10,11 +10,11 @@ import { CartItem } from '@/types'
 import Image from 'next/image'
 
 
-interface CartTableProps {
+interface OrderTableProps {
   cart: CartItem[]
 }
 
-function CartTable({ cart }: CartTableProps): JSX.Element {
+function OrderTable({ cart }: OrderTableProps): JSX.Element {
   const updateCartQuantity = useUpdateCartQuantityContext()
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [subtotal, setSubtotal] = useState<number>(0)
@@ -41,19 +41,19 @@ function CartTable({ cart }: CartTableProps): JSX.Element {
         </thead>
         <tbody className='divide-y divide-palette-lighter'>
           {cartItems.map(item => (
-            <tr key={item.variantId} className='text-sm sm:text-base text-gray-600 text-center'>
+            <tr key={item.book.id} className='text-sm sm:text-base text-gray-600 text-center'>
               <td className='font-primary font-medium px-4 sm:px-6 py-4 flex items-center'>
                 <Image
-                  src={item.productImage || ''}
-                  alt={item.productImage || ''}
+                  src={item.book.cover || ''}
+                  alt={item.book.cover || ''}
                   height={64}
                   width={64}
                   className={`hidden sm:inline-flex`}
                 />
-                <Link passHref href={`/products/${item.productHandle}`}>
-                  <a className='pt-1 hover:text-palette-dark'>
-                    {item.productTitle}, {item.variantTitle}
-                  </a>
+                <Link passHref href={`/products/${item.book.slug}`}>
+                  <div className='pt-1 hover:text-palette-dark'>
+                    {item.book.title}
+                  </div>
                 </Link>
               </td>
               <td className='font-primary font-medium px-4 sm:px-6 py-4'>
@@ -70,7 +70,7 @@ function CartTable({ cart }: CartTableProps): JSX.Element {
                 /> */}
                 <Price
                   currency='$'
-                  num={item.variantPrice}
+                  num={item.book.price}
                   numSize='text-lg'
                 />
               </td>
@@ -81,7 +81,7 @@ function CartTable({ cart }: CartTableProps): JSX.Element {
                 <button
                   aria-label='delete-item'
                   className=''
-                  onClick={() => updateItem(item.variantId.toString(), 0)}
+                  onClick={() => updateItem(item.book.id.toString(), 0)}
                 >
                   <FontAwesomeIcon icon={faTimes} className='w-8 h-8 text-palette-primary border border-palette-primary p-1 hover:bg-palette-lighter' />
                 </button>
@@ -111,4 +111,4 @@ function CartTable({ cart }: CartTableProps): JSX.Element {
   )
 }
 
-export default CartTable
+export default OrderTable

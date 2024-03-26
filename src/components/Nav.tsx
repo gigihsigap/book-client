@@ -13,7 +13,7 @@ function Nav() {
   useEffect(() => {
     let numItems = 0
     cart.forEach(item => {
-      numItems += item.variantQuantity
+      numItems += 1
     })
     setCartItems(numItems)
   }, [cart])

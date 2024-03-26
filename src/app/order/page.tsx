@@ -2,7 +2,7 @@
 
 import SEO from '@/components/SEO'
 import PageTitle from '@/components/PageTitle'
-import CartTable from '@/components/CartTable'
+import OrderTable from '@/components/OrderTable'
 import CheckOutButton from '@/components/CheckOutButton'
 import BackToProductButton from '@/components/BackToProductButton'
 import { useCartContext } from '@/context/Store'
@@ -15,7 +15,7 @@ function OrderPage() {
     <div className='container mx-auto mb-20 min-h-screen'>
       <SEO title={pageTitle} />
       <PageTitle text='Your Order' />
-      <CartTable 
+      <OrderTable 
         cart={cart}
       />
       <div className='max-w-sm mx-auto space-y-4 px-2'>
