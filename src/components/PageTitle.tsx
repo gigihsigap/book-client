@@ -1,14 +1,14 @@
 interface PageTitleProps {
-    text: string;
+    text: string
 }
 
 function PageTitle({ text }: PageTitleProps): JSX.Element {
 return (
-    <h1 className="leading-relaxed font-primary font-extrabold text-4xl text-center mt-4 py-2 sm:py-4">
+    <h1 className='leading-relaxed font-primary font-extrabold text-4xl text-center mt-4 py-2 sm:py-4'>
     {text}
     </h1>
-);
+)
 }
 
-export default PageTitle;
+export default PageTitle
   

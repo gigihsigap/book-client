@@ -7,18 +7,18 @@ type ProductInfoProps = {
 
 function ProductInfo({ book }: ProductInfoProps) {
   return (
-    <div className=" font-primary">
-      <h1 className="leading-relaxed font-extrabold text-3xl py-2 sm:py-4">
+    <div className='font-primary'>
+      <h1 className='leading-relaxed font-extrabold text-3xl py-2 sm:py-4'>
         {book.title}
       </h1>
-      <p className="font-medium text-lg">
+      <p className='font-medium text-lg'>
         {book.author}
       </p>
-      <div className="text-xl font-medium py-4 px-1">
+      <div className='text-xl font-medium py-4 px-1'>
         <Price
-          currency="$"
+          currency='$'
           num={book.price}
-          numSize="text-2xl"
+          numSize='text-2xl'
         />
       </div>
     </div>

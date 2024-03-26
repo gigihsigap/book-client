@@ -60,30 +60,30 @@ function ProductForm({ book }: ProductFormProps) {
 //   }
 
   return (
-    <div className="w-full">
-      <div className="flex justify-start space-x-2 w-full">
-        <div className="flex flex-col items-start space-y-1 flex-grow-0">
-          {/* <label className="text-gray-500 text-base">Qty.</label>
+    <div className='w-full'>
+      <div className='flex justify-start space-x-2 w-full'>
+        <div className='flex flex-col items-start space-y-1 flex-grow-0'>
+          {/* <label className='text-gray-500 text-base'>Qty.</label>
           <input
-            type="number"
-            inputMode="numeric"
-            id="quantity"
-            name="quantity"
-            min="1"
-            step="1"
+            type='number'
+            inputMode='numeric'
+            id='quantity'
+            name='quantity'
+            min='1'
+            step='1'
             value={quantity}
             onChange={(e) => updateQuantity(e.target.value)}
-            className="text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-palette-light focus:ring-palette-light"
+            className='text-gray-900 form-input border border-gray-300 w-16 rounded-sm focus:border-palette-light focus:ring-palette-light'
           /> */}
         </div>
-        <div className="flex flex-col items-start space-y-1 flex-grow">
-          {/* <label className="text-gray-500 text-base">Size</label>
+        <div className='flex flex-col items-start space-y-1 flex-grow'>
+          {/* <label className='text-gray-500 text-base'>Size</label>
           <select
-            id="size-selector"
-            name="size-selector"
+            id='size-selector'
+            name='size-selector'
             onChange={(event) => handleSizeChange(event.target.value)}
             value={variantId}
-            className="form-select border border-gray-300 rounded-sm w-full text-gray-900 focus:border-palette-light focus:ring-palette-light"
+            className='form-select border border-gray-300 rounded-sm w-full text-gray-900 focus:border-palette-light focus:ring-palette-light'
           >
             {
               variants.map(item => (
@@ -101,11 +101,11 @@ function ProductForm({ book }: ProductFormProps) {
       </div>
       <Button
         // className={atcBtnStyle}
-        aria-label="cart-button"
+        aria-label='cart-button'
         onClick={handleAddToCart}
       >
         Add To Cart
-        <FontAwesomeIcon icon={faShoppingCart} className="w-5 ml-2" />
+        <FontAwesomeIcon icon={faShoppingCart} className='w-5 ml-2' />
       </Button>
     </div>
   )

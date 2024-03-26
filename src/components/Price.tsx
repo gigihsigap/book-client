@@ -1,7 +1,7 @@
-interface PriceProps {
-  currency: string;
-  num: number;
-  numSize: string;
+type PriceProps = {
+  currency: string
+  num: number
+  numSize: string
 }
 
 function Price({ currency, num, numSize }: PriceProps): JSX.Element {
@@ -9,7 +9,7 @@ function Price({ currency, num, numSize }: PriceProps): JSX.Element {
     <>
       {currency}<span className={numSize}>{num}</span>
     </>
-  );
+  )
 }
 
-export default Price;
+export default Price
