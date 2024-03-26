@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useUpdateCartQuantityContext } from '@/context/Store'
+import { useUpdateCartQuantityContext } from '@/context/Stores'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { CartProvider } from '@/context/Store'
+import { CartProvider } from '@/context/Stores'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 

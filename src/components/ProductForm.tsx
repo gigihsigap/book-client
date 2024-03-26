@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { useCartContext, useAddToCartContext } from '@/context/Store'
+import { useCartContext, useAddToCartContext } from '@/context/Stores'
 import { Book } from '@/types'
 import { Button } from './ui/button'
 

@@ -52,7 +52,7 @@ export function LoginCard() {
           <CardHeader>
             <CardTitle>Welcome!</CardTitle>
             <CardDescription>
-              You're one step closer to finding books you love.
+              You are one step closer to finding books you love.
             </CardDescription>
           </CardHeader>
           <CardContent className='space-y-2'>

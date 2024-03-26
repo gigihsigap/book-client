@@ -5,7 +5,7 @@ import PageTitle from '@/components/PageTitle'
 import OrderTable from '@/components/OrderTable'
 import CheckOutButton from '@/components/CheckOutButton'
 import BackToProductButton from '@/components/BackToProductButton'
-import { useCartContext } from '@/context/Store'
+import { useCartContext } from '@/context/Stores'
 
 function OrderPage() {
   const pageTitle = `Cart | ${process.env.siteTitle}`  
