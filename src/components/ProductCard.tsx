@@ -2,6 +2,7 @@ import Image from 'next/legacy/image'
 import Link from 'next/link'
 import Price from '@/components/Price'
 import { Book } from '@/types'
+import { capitalizeFirstLetter } from '@/lib/utils'
 
 type ProductCardProps = {
     book: Book
@@ -9,9 +10,18 @@ type ProductCardProps = {
 
 function ProductCard({ book }: ProductCardProps) {
   const handle = book.slug
-  const title = book.title
-  const description = book.author
+  let title = book.title
+  const titleWords = title.split(' ')
+  if (titleWords.length > 5){
+    title = titleWords.slice(0, 4).join(' ') + '...';
+  }
+  let author = book.author
+  const authorWords = author.split(',')
+  if (authorWords.length > 2){
+    author = authorWords.slice(0, 2).join(',') + '...';
+  }
   const price = book.price
+  const tags = book.tags
 
   const imageNode = book.cover
 
@@ -33,11 +43,27 @@ function ProductCard({ book }: ProductCardProps) {
           />
         </div>
         <div className='h-48 relative'>
-          <div className='font-primary text-lg pt-4 px-4 font-semibold'>
+          <div className='font-primary text-lg pt-2 px-4 font-semibold'>
             {title}
           </div>
-          <div className='text-md text-gray-600 p-4 font-primary font-light'>
-            {description}
+          <div className='text-sm text-gray-600 pt-2 px-4 font-primary font-light'>
+            {author}
+          </div>
+          <div
+            className='text-palette-dark font-primary font-medium text-base absolute bottom-0 left-0 mb-4 pl-4 pr-4 pb-1 pt-2 bg-palette 
+            rounded-tl-sm triangle'
+          >
+            <>
+                {tags ? (
+                    tags.map((tag, index) => {
+                        return (
+                            <span key={index}>{`${capitalizeFirstLetter(tag)} `}</span>
+                        )
+                    })
+                ) : (
+                    <></>
+                )}
+            </>
           </div>
           <div
             className='text-palette-dark font-primary font-medium text-base absolute bottom-0 right-0 mb-4 pl-8 pr-4 pb-1 pt-2 bg-palette-lighter 
@@ -52,20 +78,6 @@ function ProductCard({ book }: ProductCardProps) {
         </div>
       </div>
     </Link>
-    // <Card>
-    //     <CardContent className='flex flex-col items-center justify-center p-4'>
-    //         <img
-    //             src={book.cover}
-    //             alt={book.title}
-    //             className='object-contain h-48 rounded'
-    //         />
-    //     </CardContent>
-    //     <CardFooter className='text-center flex flex-col p-4'>
-    //         <CardTitle className='my-2'>{book.title}</CardTitle>
-    //         <CardDescription>{book.author}</CardDescription>
-    //         <span>{book.price}</span>
-    //     </CardFooter>
-    // </Card>
   )
 }
 

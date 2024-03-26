@@ -3,11 +3,11 @@
 import ProductCard from '@/components/ProductCard'
 import { Book } from '@/types'
 
-export interface BookProps {
+export interface BookListingProps {
     books: Book[] | null
 }
 
-export function Books({ books }: BookProps) {
+export function BookListing({ books }: BookListingProps) {
     console.log('Books fetched:', books?.length)
     return (
         <>

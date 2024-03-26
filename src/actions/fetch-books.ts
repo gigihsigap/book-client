@@ -1,9 +1,9 @@
 import { Book } from '@/types'
 
-export async function fetchBooks(page: number): Promise<Book[] | null> {
+export async function fetchBooks(page: number, attr: string, value: string): Promise<Book[] | null> {
     const perPage = 15
     const offset = (page - 1) * perPage
-    const apiUrl = `https://book-server-henna.vercel.app/api/book?offset=${offset}&limit=${perPage}`
+    const apiUrl = `https://book-server-henna.vercel.app/api/book?offset=${offset}&limit=${perPage}&attr=${attr}&value=${value}`
 
     try {
         const response = await fetch(apiUrl)
