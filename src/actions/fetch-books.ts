@@ -1,7 +1,6 @@
 import { Book } from '@/types'
 
 export async function fetchBooks(page: number, attr: string, value: string): Promise<Book[] | null> {
-    console.log(`Fetching book titled: ${value}, and page ${page}`)
     const perPage = 16
     const offset = (page - 1) * perPage
     const apiUrl = `https://book-server-henna.vercel.app/api/book?offset=${offset}&limit=${perPage}&attr=${attr}&value=${value}`
@@ -12,7 +11,6 @@ export async function fetchBooks(page: number, attr: string, value: string): Pro
         if (!response.ok) throw new Error(`Failed to fetch data: ${response.statusText}`)
 
         const {data} = await response.json()
-        console.log(`Response:`, data.length)
         return data
     } catch(error) {
         console.error('Error fetching data:', error)

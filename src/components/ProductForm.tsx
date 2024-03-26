@@ -34,7 +34,6 @@ function ProductForm({ book }: ProductFormProps) {
 //   }
 
   async function handleAddToCart() {
-    console.log("handleAddToCart", book)
     // const varId = variant.id
     // update store context
     // if (quantity !== '') {

@@ -19,7 +19,6 @@ export default function Home() {
   const handleSearch = async () => {
     setLoading(true) // Set loading state to true when starting search
     const searchedBooks = await fetchBooks(1, 'title', searchInput)
-    console.log("Books searched:", searchedBooks?.length)
     setBooks(searchedBooks || []) // Update books state with search result
     setLoading(false) // Set loading state to false after search completes
     setFinalSearchInput(searchInput) // Update final search input when search is finalized

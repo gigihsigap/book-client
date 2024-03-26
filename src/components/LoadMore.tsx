@@ -21,7 +21,6 @@ export function LoadMore({page, attr, value}: LoadMoreProps) {
     const { ref, inView } = useInView()
 
     const loadMoreBooks = async () => {
-        console.log("Value load more:", attr, value)
         await delay(100)
         const nextPage = (pagesLoaded % 2) + 1 // Make the scroll infinite
         const newProducts = await fetchBooks(nextPage, attr, value) ?? []
