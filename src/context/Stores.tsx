@@ -1,15 +1,16 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect } from 'react'
-import { createShopifyCheckout, updateShopifyCheckout, setLocalData, saveLocalData } from '../lib/cartUtils'
+import { createShopifyCheckout, updateShopifyCheckout, saveLocalData } from '../lib/cartUtils'
 import { Cart, CartItem, CartProviderProps } from '@/types'
 
-const CartContext = createContext<[Cart, string, boolean, number]>([[], '', false, 100])
+const CartContext = createContext<[Cart, string, boolean]>([[], '', false])
 const AddToCartContext = createContext<(newItem: CartItem) => void>(() => {})
 const UpdateCartQuantityContext = createContext<(id: string, quantity: number) => void>(() => {}) // Changed quantity type to number
-const PurchaseMadeContext = createContext<() => void>(() => {})
+const ProfileContext = createContext<(number)>(0)
+const PurchaseMadeContext = createContext<(cost: number) => void>(() => {})
 
-export function useCartContext(): [Cart, string, boolean, number] {
+export function useCartContext(): [Cart, string, boolean] {
   return useContext(CartContext)
 }
 
@@ -21,7 +22,11 @@ export function useUpdateCartQuantityContext(): (id: string, quantity: number) =
   return useContext(UpdateCartQuantityContext)
 }
 
-export function usePurchaseMadeContext(): () => void { // Changed quantity type to number
+export function useProfileContext(): (number) {
+  return useContext(ProfileContext)
+}
+
+export function usePurchaseMadeContext(): (cost: number) => void { // Changed quantity type to number
   return useContext(PurchaseMadeContext)
 }
 
@@ -106,22 +111,31 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     setIsLoading(false)
   }
 
-  async function purchaseMade(): Promise<void> {
+  async function purchaseMade(cost: number): Promise<void> {
     setIsLoading(true)
-    setCart([])
-    saveLocalData([], checkoutId, checkoutUrl)
+    if (points >= cost) {
+      const calculatePoints = points - cost
+      setCart([])
+      saveLocalData([], checkoutId, checkoutUrl)
+      setPoints(calculatePoints)
+      alert("You have purchased the item!");
+    } else {
+      alert("Not enough points to make this purchase!");
+    }
     setIsLoading(false)
   }
 
   return (
-    <CartContext.Provider value={[cart, checkoutUrl, isLoading, points]}>
-      <AddToCartContext.Provider value={addToCart}>
-        <UpdateCartQuantityContext.Provider value={updateCartItemQuantity}>
-          <PurchaseMadeContext.Provider value={purchaseMade}>
-          {children}
-          </PurchaseMadeContext.Provider>
-        </UpdateCartQuantityContext.Provider>
-      </AddToCartContext.Provider>
+    <CartContext.Provider value={[cart, checkoutUrl, isLoading]}>
+      <ProfileContext.Provider value={points}>
+        <AddToCartContext.Provider value={addToCart}>
+          <UpdateCartQuantityContext.Provider value={updateCartItemQuantity}>
+            <PurchaseMadeContext.Provider value={purchaseMade}>
+            {children}
+            </PurchaseMadeContext.Provider>
+          </UpdateCartQuantityContext.Provider>
+        </AddToCartContext.Provider>
+      </ProfileContext.Provider>
     </CartContext.Provider>
   )
 }

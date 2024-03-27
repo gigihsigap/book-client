@@ -5,32 +5,19 @@ import PageTitle from '@/components/PageTitle'
 import OrderTable from '@/components/OrderTable'
 import CheckOutButton from '@/components/CheckOutButton'
 import BackToProductButton from '@/components/BackToProductButton'
-import { useCartContext, usePurchaseMadeContext, useUpdateCartQuantityContext } from '@/context/Stores'
-import { useState } from 'react'
+import { useCartContext, useProfileContext, usePurchaseMadeContext } from '@/context/Stores'
 import { getCartSubTotal } from '@/lib/cartUtils'
 
 function OrderPage() {
-  const purchaseMade = usePurchaseMadeContext()
-
   const pageTitle = `Cart | ${process.env.siteTitle}`  
   const [cart, checkoutUrl] = useCartContext()
-  const [points, setPoints] = useState(100)
-
-  function clearItems(): void {
-    purchaseMade()
-  }
+  const purchaseMade = usePurchaseMadeContext()
+  const points = useProfileContext()
 
   // Function to handle checkout
   const handleCheckout = () => {
     const totalCost = getCartSubTotal(cart);
-    if (points >= totalCost) {
-      setPoints(points - totalCost);
-      clearItems()
-      alert("You have purchased the item!");
-      // window.location.href = checkoutUrl; // Redirect to checkout
-    } else {
-      alert("Not enough points to make this purchase!");
-    }
+    purchaseMade(totalCost)
   };
 
   return (
