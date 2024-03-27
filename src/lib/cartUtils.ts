@@ -28,7 +28,7 @@ export function setLocalData(setCart: (cart: CartItem[]) => void, setCheckoutId:
   }
 }
 
-export async function createShopifyCheckout(newItem: CartItem): Promise<any> {
+export async function createShopifyCheckout(newItem: CartItem): Promise<string> {
   const data = await createCheckout(newItem.book.id.toString(), 1)
   return data
 }

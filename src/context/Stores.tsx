@@ -58,10 +58,10 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     if (cart.length === 0) {
       setCart([newItem])
   
-      const response = await createShopifyCheckout(newItem)
-      setCheckoutId(response.id)
-      setCheckoutUrl(response.webUrl)
-      saveLocalData([newItem], response.id, response.webUrl)
+      // const response = await createShopifyCheckout(newItem)
+      // setCheckoutId(response.id)
+      // setCheckoutUrl(response.webUrl)
+      // saveLocalData([newItem], response.id, response.webUrl)
     } else {
       let newCart = [...cart]
       let itemAdded = false

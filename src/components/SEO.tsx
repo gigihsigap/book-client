@@ -37,14 +37,14 @@ function SEO({ title }: SeoProps) {
         rel='icon'
         type='image/png'
         sizes='16x16'
-        // purpose='any maskable'
+        // purpose='maskable'
       />
       <link
         href='/icons/icon-32x32.png'
         rel='icon'
         type='image/png'
         sizes='32x32'
-        // purpose='any maskable'
+        // purpose='maskable'
       />
       <link rel='apple-touch-icon' href='/apple-icon.png'></link> */}
       <meta name='theme-color' content='#EF4444' />

@@ -1,8 +1,8 @@
 async function callShopify(query: string): Promise<string> {
   // Dummy success data for testing purposes
-  const dummyData: any = {
+  const dummyData: string = ""
     // Add your dummy data here
-  };
+  ;
 
   // Return dummy data
   return Promise.resolve(dummyData);
@@ -10,7 +10,7 @@ async function callShopify(query: string): Promise<string> {
 
 export async function getAllProductsInCollection(): Promise<string[]> {
   // Dummy data for all products in a collection
-  const dummyProducts: any[] = [
+  const dummyProducts: string[] = [
     // Add your dummy products here
   ];
 
@@ -28,27 +28,27 @@ export async function getProductSlugs(): Promise<string[]> {
 
 export async function getProduct(handle: string): Promise<string> {
   // Dummy data for a product
-  const dummyProduct: any = {
+  const dummyProduct: string = ""
     // Add your dummy product here
-  };
+  ;
 
   return dummyProduct;
 }
 
 export async function createCheckout(id: string, quantity: number): Promise<string> {
   // Dummy data for creating a checkout
-  const dummyCheckout: any = {
+  const dummyCheckout: string = ""
     // Add your dummy checkout data here
-  };
+  ;
 
   return dummyCheckout;
 }
 
 export async function updateCheckout(id: string, lineItems: { variantId: string; quantity: number }[]): Promise<string> {
   // Dummy data for updating a checkout
-  const dummyUpdatedCheckout: any = {
+  const dummyUpdatedCheckout: string = ""
     // Add your dummy updated checkout data here
-  };
+  ;
 
   return dummyUpdatedCheckout;
 }
